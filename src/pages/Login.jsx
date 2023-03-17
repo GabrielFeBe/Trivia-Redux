@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { savePlayerInfo } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -25,7 +27,7 @@ class Login extends React.Component {
 
   render() {
     const { name, email } = this.state;
-    const { history: { push } } = this.props;
+    const { history: { push }, dispatch } = this.props;
     return (
       <>
         <input
@@ -50,6 +52,7 @@ class Login extends React.Component {
           onClick={ async () => {
             // Temos que fazer um tratamendo para caso retorne o response_code 0 ou 3
             const token = await this.getToken();
+            dispatch(savePlayerInfo({ email, name }));
             localStorage.setItem('token', token.token);
             push('/game');
           } }
@@ -58,7 +61,6 @@ class Login extends React.Component {
         </button>
         <Link to="/settings">
           <button data-testid="btn-settings">Configurações</button>
-
         </Link>
       </>
     );
@@ -67,6 +69,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default connect()(Login);
