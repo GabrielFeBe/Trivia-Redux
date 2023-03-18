@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Question from '../components/Question';
 
 const three = 3;
 
 export default class Game extends Component {
   state = {
-    // triviaQuestion: '',
+    triviaQuestion: [],
+    currentQuestion: 0,
   };
 
   async componentDidMount() {
@@ -16,14 +19,14 @@ export default class Game extends Component {
     if (apiResponse.response_code === three || !token) {
       this.limpaRedireciona();
     } else {
-      // this.setState({ triviaQuestion: apiResponse });
+      this.setState({ triviaQuestion: apiResponse.results });
     }
   }
 
   limpaRedireciona = () => {
-    // const { history } = this.props;
+    const { history } = this.props;
     localStorage.clear();
-    // history.push('/');
+    history.push('/');
   };
 
   apiRequest = async (token) => {
@@ -32,12 +35,24 @@ export default class Game extends Component {
     return data;
   };
 
+  nextQuestionButton = () => {
+    this.setState((prev) => ({ currentQuestion: prev.currentQuestion + 1 }));
+  };
+
   render() {
+    const { currentQuestion, triviaQuestion } = this.state;
     return (
       <div>
         <Header />
-        Game
+        { triviaQuestion.length > 1 && <Question
+          nextButton={ this.nextQuestionButton }
+          question={ triviaQuestion[currentQuestion] }
+        />}
       </div>
     );
   }
 }
+
+Game.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
