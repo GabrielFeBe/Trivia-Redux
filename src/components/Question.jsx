@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Question.css';
 
 const zeroOFive = 0.5;
 
 export default class Question extends Component {
+  state = {
+    trigger: false,
+  };
+
   render() {
     const { question } = this.props;
+    const { trigger } = this.state;
     return (
       <div>
         <p data-testid="question-category">{question.category}</p>
@@ -21,6 +27,10 @@ export default class Question extends Component {
                 <button
                   key={ index }
                   data-testid="correct-answer"
+                  className={ trigger && 'rigth ' }
+                  onClick={ () => {
+                    this.setState({ trigger: true });
+                  } }
                 >
                   {answer}
                 </button>
@@ -31,6 +41,10 @@ export default class Question extends Component {
               <button
                 data-testid={ `wrong-answer-${index}` }
                 key={ index }
+                className={ trigger && 'wrong' }
+                onClick={ () => {
+                  this.setState({ trigger: true });
+                } }
               >
                 {answer}
 
