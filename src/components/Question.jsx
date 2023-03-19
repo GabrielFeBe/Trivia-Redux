@@ -28,6 +28,7 @@ export default class Question extends Component {
                   key={ index }
                   data-testid="correct-answer"
                   className={ trigger && 'rigth ' }
+                  // para Ligar as cores
                   onClick={ () => {
                     this.setState({ trigger: true });
                   } }
@@ -43,6 +44,7 @@ export default class Question extends Component {
                 key={ index }
                 className={ trigger && 'wrong' }
                 onClick={ () => {
+                  // para ligar as cores
                   this.setState({ trigger: true });
                 } }
               >
