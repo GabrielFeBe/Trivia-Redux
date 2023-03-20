@@ -1,9 +1,10 @@
 const INITIAL_STATE = {
   name: '',
   email: '',
+  score: 0,
 };
 
-const playerReducer = (state = INITIAL_STATE, action) => {
+const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case 'LOGIN_ACTION':
     return {
@@ -11,9 +12,14 @@ const playerReducer = (state = INITIAL_STATE, action) => {
       name: action.PlayerInfo.name,
       email: action.PlayerInfo.email,
     };
+  case 'SAVE_SCORE':
+    return {
+      ...state,
+      score: state.score + action.score,
+    };
   default:
     return state;
   }
 };
 
-export default playerReducer;
+export default player;
