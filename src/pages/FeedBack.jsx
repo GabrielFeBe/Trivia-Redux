@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 class FeedBack extends Component {
   render() {
-    const { assertions } = this.props;
+    const { assertions, score, history: { push } } = this.props;
     const three = 3;
     return (
       <>
@@ -15,6 +15,18 @@ class FeedBack extends Component {
             assertions < three ? <p>Could be better...</p> : <p>Well Done!</p>
           }
         </div>
+        <p data-testid="feedback-total-score">
+          {score}
+        </p>
+        <p data-testid="feedback-total-question">
+          {assertions}
+        </p>
+        <button
+          data-testid="btn-play-again"
+          onClick={ () => push('/') }
+        >
+          Play Again
+        </button>
       </>
     );
   }
@@ -22,10 +34,13 @@ class FeedBack extends Component {
 
 FeedBack.propTypes = {
   assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
+  score: state.player.score,
 });
 
 export default connect(mapStateToProps)(FeedBack);
