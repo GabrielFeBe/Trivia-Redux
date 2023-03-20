@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import RankingButton from '../components/RankingButton';
 
 class FeedBack extends Component {
   render() {
@@ -27,6 +28,7 @@ class FeedBack extends Component {
         >
           Play Again
         </button>
+        <RankingButton push={ push } />
       </>
     );
   }

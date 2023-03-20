@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Question from '../components/Question';
+import RankingButton from '../components/RankingButton';
 
 const three = 3;
 
@@ -51,6 +52,7 @@ export default class Game extends Component {
           number={ currentQuestion }
           push={ push }
         />}
+        <RankingButton push={ push } />
       </div>
     );
   }
