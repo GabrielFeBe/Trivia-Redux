@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   score: 0,
+  count: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,7 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: state.score + action.score,
+      count: state.count + 1,
     };
   default:
     return state;
