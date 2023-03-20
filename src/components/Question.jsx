@@ -38,11 +38,22 @@ class Question extends Component {
     }
   }
 
-  componentDidUpdate(_prevProps, prevState) {
+  componentDidUpdate({ number: prevNumber }, prevState) {
     const TIME_LIMIT = 1;
+    const { number } = this.props;
     if (prevState.seconds === TIME_LIMIT) {
       clearInterval(this.intervalID);
       this.setState({ timeOut: true });
+    }
+    if (prevNumber !== number) {
+      this.setState({
+        trigger: false,
+        seconds: 30,
+        arrayOfQuestions: [],
+        timeOut: false,
+        difficulty: 0,
+      });
+      this.componentDidMount();
     }
   }
 
@@ -66,8 +77,9 @@ class Question extends Component {
   };
 
   render() {
-    const { question, dispatch } = this.props;
+    const { question, dispatch, nextButton, number, push } = this.props;
     const { trigger, arrayOfQuestions, seconds, timeOut } = this.state;
+    const four = 4;
     return (
       <div>
         <p data-testid="question-category">{question.category}</p>
@@ -88,7 +100,7 @@ class Question extends Component {
                   onClick={ () => {
                     dispatch(savePlayerScore(this.savingScore()));
                     clearInterval(this.intervalID);
-                    this.setState({ trigger: true });
+                    this.setState({ trigger: true, timeOut: true });
                   } }
                 >
                   {answer}
@@ -105,7 +117,7 @@ class Question extends Component {
                 onClick={ () => {
                   // para ligar as cores
                   clearInterval(this.intervalID);
-                  this.setState({ trigger: true });
+                  this.setState({ trigger: true, timeOut: true });
                 } }
               >
                 {answer}
@@ -114,6 +126,22 @@ class Question extends Component {
             );
           }) }
         </div>
+        {
+          timeOut
+        && (
+          <button
+            data-testid="btn-next"
+            onClick={ () => {
+              if (number === four) {
+                push('/feedback');
+              }
+              nextButton();
+            } }
+          >
+            Next
+          </button>
+        )
+        }
       </div>
     );
   }
@@ -129,6 +157,9 @@ Question.propTypes = {
 
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  nextButton: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 export default connect()(Question);

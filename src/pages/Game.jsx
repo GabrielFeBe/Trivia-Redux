@@ -41,12 +41,15 @@ export default class Game extends Component {
 
   render() {
     const { currentQuestion, triviaQuestion } = this.state;
+    const { history: { push } } = this.props;
     return (
       <div>
         <Header />
         { triviaQuestion.length > 1 && <Question
           nextButton={ this.nextQuestionButton }
           question={ triviaQuestion[currentQuestion] }
+          number={ currentQuestion }
+          push={ push }
         />}
       </div>
     );
