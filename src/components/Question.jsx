@@ -126,8 +126,9 @@ Question.propTypes = {
     question: PropTypes.string,
     correct_answer: PropTypes.string,
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
-    dispatch: PropTypes.func.isRequired,
+
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect()(Question);
