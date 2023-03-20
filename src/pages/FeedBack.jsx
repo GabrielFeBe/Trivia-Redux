@@ -5,14 +5,14 @@ import Header from '../components/Header';
 
 class FeedBack extends Component {
   render() {
-    const { count } = this.props;
+    const { assertions } = this.props;
     const three = 3;
     return (
       <>
         <Header />
         <div data-testid="feedback-text">
           {
-            count < three ? <p>Could be better...</p> : <p>Well Done!</p>
+            assertions < three ? <p>Could be better...</p> : <p>Well Done!</p>
           }
         </div>
       </>
@@ -21,11 +21,11 @@ class FeedBack extends Component {
 }
 
 FeedBack.propTypes = {
-  count: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  count: state.player.count,
+  assertions: state.player.assertions,
 });
 
 export default connect(mapStateToProps)(FeedBack);
