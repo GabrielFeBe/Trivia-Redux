@@ -3,15 +3,14 @@ import React from "react";
 import { screen } from "@testing-library/react";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import App from "../App";
+import token from './helpers/mockToken';
 
 describe('Testa a pagina de Login', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
-      json: jest.fn().mockResolvedValue({
-        "response_code": 0,
-        "response_message": "Token Generated Successfully!",
-        "token": "2e7094ef2c52834ae0d61a0396c745ddcac587f3337e07ce80fb70dd5e54fe52"
-    }),
+      json: jest.fn().mockResolvedValue(
+        token,
+      ),
     });
   });
 

@@ -14,7 +14,7 @@ export default class Game extends Component {
 
   async componentDidMount() {
     const token = localStorage.getItem('token');
-    console.log(token);
+    // console.log(token);
     const apiResponse = await this.apiRequest(token);
     console.log(apiResponse);
     if (apiResponse.response_code === three || !token) {
