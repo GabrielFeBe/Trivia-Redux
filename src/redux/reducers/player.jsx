@@ -19,6 +19,14 @@ const player = (state = INITIAL_STATE, action) => {
       score: state.score + action.score,
       assertions: state.assertions + 1,
     };
+  case 'CLEAN_SCORE':
+    return {
+      ...state,
+      score: 0,
+      assertions: 0,
+      name: '',
+      email: '',
+    };
   default:
     return state;
   }

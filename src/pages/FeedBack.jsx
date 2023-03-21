@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import RankingButton from '../components/RankingButton';
+import { cleanPlayerInfo } from '../redux/actions';
 
 class FeedBack extends Component {
   render() {
-    const { assertions, score, history: { push } } = this.props;
+    const { assertions, score, history: { push }, dispatch } = this.props;
     const three = 3;
     return (
       <>
@@ -24,7 +25,10 @@ class FeedBack extends Component {
         </p>
         <button
           data-testid="btn-play-again"
-          onClick={ () => push('/') }
+          onClick={ () => {
+            dispatch(cleanPlayerInfo());
+            push('/');
+          } }
         >
           Play Again
         </button>
@@ -38,6 +42,7 @@ FeedBack.propTypes = {
   assertions: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -77,7 +77,14 @@ class Question extends Component {
   };
 
   render() {
-    const { question, dispatch, nextButton, number, push } = this.props;
+    const { question,
+      dispatch,
+      nextButton,
+      number,
+      push,
+      score,
+      name,
+      email } = this.props;
     const { trigger, arrayOfQuestions, seconds, timeOut } = this.state;
     const four = 4;
     return (
@@ -133,6 +140,14 @@ class Question extends Component {
             data-testid="btn-next"
             onClick={ () => {
               if (number === four) {
+                const myArray = JSON.parse(localStorage.getItem('ranking')) || [];
+                const infoObj = { score, name, email };
+                myArray.push(infoObj);
+                const sortedArray = myArray.sort(
+                  ({ score: scoreA }, { score: scoreB }) => scoreB - scoreA,
+                );
+                localStorage.setItem('ranking', JSON.stringify(sortedArray));
+
                 push('/feedback');
               }
               nextButton();
@@ -147,6 +162,12 @@ class Question extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+  email: state.player.email,
+  score: state.player.score,
+});
+
 Question.propTypes = {
   question: PropTypes.shape({
     difficulty: PropTypes.string,
@@ -160,6 +181,9 @@ Question.propTypes = {
   nextButton: PropTypes.func.isRequired,
   number: PropTypes.number.isRequired,
   push: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
-export default connect()(Question);
+export default connect(mapStateToProps)(Question);
