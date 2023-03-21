@@ -4,9 +4,8 @@ import { screen, waitFor } from "@testing-library/react";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import App from "../App";
 import token from './helpers/mockToken';
-describe('Testa a tela de FeedBack', () => {
+describe('Testa a tela de Feedback', () => {
     test ('Verifica se as informações dessa tela estão apresentadas conforme solicitado ', () =>  {
-
       const initialState = {
         token: token,
         player: {
@@ -17,8 +16,7 @@ describe('Testa a tela de FeedBack', () => {
         }
       }
       
-      //...
-        renderWithRouterAndRedux(<App />, initialState, "/feedback");
+      renderWithRouterAndRedux(<App />, initialState, "/feedback");
 
         const img = screen.getByRole('img');
         expect(img).toBeInTheDocument();
