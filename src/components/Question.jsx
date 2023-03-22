@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Question.css';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { savePlayerScore } from '../redux/actions';
+import './Question.css';
+import certo from '../images/certo.png';
+import errado from '../images/errado.png';
+import timer from '../images/Vector.png';
 
 const zeroOFive = 0.5;
 
@@ -88,13 +91,21 @@ class Question extends Component {
     const { trigger, arrayOfQuestions, seconds, timeOut } = this.state;
     const four = 4;
     return (
-      <div>
-        <p data-testid="question-category">{question.category}</p>
-        <p data-testid="question-text">{question.question}</p>
+      <div className="questionComponent">
+        <div className="questionContainer">
+          <p data-testid="question-category" className="category">{question.category}</p>
+          <p data-testid="question-text" className="questionBox">{question.question}</p>
+          <div className="timer">
+            <img src={ timer } alt="timer" className="timerImg" />
+            {`Tempo: ${seconds}s `}
+
+          </div>
+        </div>
         <div
           data-testid="answer-options"
+          className="answerOptions"
         >
-          <div>{seconds}</div>
+
           {arrayOfQuestions.map((answer, index) => {
             if (answer === question.correct_answer) {
               return (
@@ -102,7 +113,7 @@ class Question extends Component {
                   key={ index }
                   disabled={ timeOut }
                   data-testid="correct-answer"
-                  className={ trigger && 'rigth ' }
+                  className={ `questButton ${trigger && 'rigth '}` }
                   // para Ligar as cores
                   onClick={ () => {
                     dispatch(savePlayerScore(this.savingScore()));
@@ -110,7 +121,16 @@ class Question extends Component {
                     this.setState({ trigger: true, timeOut: true });
                   } }
                 >
-                  {answer}
+                  {trigger && (
+                    <div className="imgContainerCerto">
+                      <img
+                        className="certo"
+                        src={ certo }
+                        alt="certo"
+                      />
+
+                    </div>)}
+                  <span>{answer}</span>
                 </button>
               );
             }
@@ -120,24 +140,30 @@ class Question extends Component {
                 data-testid={ `wrong-answer-${index}` }
                 key={ index }
                 disabled={ timeOut }
-                className={ trigger && 'wrong' }
+                className={ `questButton ${trigger && 'wrong'}` }
                 onClick={ () => {
                   // para ligar as cores
                   clearInterval(this.intervalID);
                   this.setState({ trigger: true, timeOut: true });
                 } }
               >
-                {answer}
+                {trigger && (
+                  <div className="imgContainer">
+                    <img src={ errado } alt="errado" className="errado" />
+
+                  </div>
+                )}
+                <span>{answer}</span>
 
               </button>
             );
           }) }
-        </div>
-        {
-          timeOut
+          {
+            timeOut
         && (
           <button
             data-testid="btn-next"
+            className="nextBtn"
             onClick={ () => {
               if (number === four) {
                 const myArray = JSON.parse(localStorage.getItem('ranking')) || [];
@@ -156,7 +182,8 @@ class Question extends Component {
             Next
           </button>
         )
-        }
+          }
+        </div>
       </div>
     );
   }
