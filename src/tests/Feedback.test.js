@@ -65,4 +65,28 @@ describe('Testa a tela de Feedback', () => {
         expect(history.location.pathname).toBe('/game');
       });
     });
+
+    test('Verifica se ao clicar no botão Ranking a aplicação é redirecionada para pagina de correspondente.', () => {
+      const initialState = {
+        token: token,
+        player: {
+          name: 'Player Name',
+          gravatarEmail: 'player@email.com',
+          score: 0,
+          assertions: 3,
+        }
+      }
+      
+      const { history } = renderWithRouterAndRedux(<App />, initialState, "/feedback");
+
+      const message2 = screen.getByTestId('feedback-text');
+      expect(message2).toBeInTheDocument();
+
+      const buttonPlayAgain = screen.getByRole('button', { name: /ranking/i });
+      userEvent.click(buttonPlayAgain);
+
+      waitFor(() => { 
+        expect(history.location.pathname).toBe('/ranking');
+      });
+    });
     });

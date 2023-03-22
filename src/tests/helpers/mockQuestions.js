@@ -1,14 +1,16 @@
 const questions = {
   "response_code": 0,
   "results": [
-      {
-          "category": "Science: Computers",
-          "type": "boolean",
-          "difficulty": "medium",
-          "question": "FLAC stands for &quot;Free Lossless Audio Condenser&quot;&#039;",
-          "correct_answer": "False",
+        {
+          "category": "Science & Nature",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is the &quot;powerhouse&quot; of the Eukaryotic animal cell?",
+          "correct_answer": "Mitochondria",
           "incorrect_answers": [
-              "True"
+              "Nucleus",
+              "Chloroplast",
+              "Endoplasmic Reticulum"
           ]
       },
       {
@@ -26,18 +28,6 @@ const questions = {
       {
           "category": "Entertainment: Video Games",
           "type": "multiple",
-          "difficulty": "hard",
-          "question": "What was the world&#039;s first handheld game device?",
-          "correct_answer": "Mattel Auto Race",
-          "incorrect_answers": [
-              "Game Boy",
-              "Microvision",
-              "Game &amp; Watch"
-          ]
-      },
-      {
-          "category": "Entertainment: Video Games",
-          "type": "multiple",
           "difficulty": "medium",
           "question": "In the video game &quot;League of Legends&quot; which character is known as &quot;The Sinister Blade&quot;?",
           "correct_answer": "Katarina",
@@ -45,6 +35,18 @@ const questions = {
               "Shaco",
               "Akali",
               "Zed"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "What was the world&#039;s first handheld game device?",
+          "correct_answer": "Mattel Auto Race",
+          "incorrect_answers": [
+              "Game Boy",
+              "Microvision",
+              "Game &amp; Watch"
           ]
       },
       {
