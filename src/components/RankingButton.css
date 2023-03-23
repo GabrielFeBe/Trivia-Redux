@@ -1,0 +1,20 @@
+.buttonss {
+  background-color: #08c;
+  border: 1px solid #08cc;
+  border-radius: 4px;
+  color: #f3ecec;
+  cursor: pointer;
+  font-size: 25px;
+  left: 35%;
+  margin: 10px;
+  padding: 10px 8px;
+  position: relative;
+  text-align: center;
+  top: 100%;
+  width: 350px;
+}
+
+.button:hover {
+  background-color: #f7eeee;
+  color: #08cc;
+}

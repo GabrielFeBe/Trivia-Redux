@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './RankingButton.css';
 
 class RankingButton extends Component {
   render() {
@@ -7,6 +8,7 @@ class RankingButton extends Component {
     return (
       <div>
         <button
+          className="button"
           data-testid="btn-ranking"
           onClick={ () => push('/ranking') }
         >

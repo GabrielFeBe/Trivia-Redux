@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { savePlayerInfo } from '../redux/actions';
+import './Login.css';
 
 class Login extends React.Component {
   state = {
@@ -29,40 +30,60 @@ class Login extends React.Component {
     const { name, email } = this.state;
     const { history: { push }, dispatch } = this.props;
     return (
-      <>
-        <input
-          data-testid="input-player-name"
-          type="text"
-          value={ name }
-          name="name"
-          onChange={ this.handleChange }
-          placeholder="Digite seu nome"
-        />
-        <input
-          data-testid="input-gravatar-email"
-          type="email"
-          value={ email }
-          name="email"
-          onChange={ this.handleChange }
-          placeholder="Digite seu Email"
-        />
-        <button
-          data-testid="btn-play"
-          disabled={ !(name.length > 0 && email.length > 0) }
-          onClick={ async () => {
+      <div className="container">
+        <div className="labels">
+          <label htmlFor="name">
+            Nome
+            <input
+              id="name"
+              data-testid="input-player-name"
+              type="text"
+              value={ name }
+              name="name"
+              onChange={ this.handleChange }
+              placeholder="Digite seu nome"
+            />
+          </label>
+          <label htmlFor="email">
+            Email
+            <input
+              id="email"
+              data-testid="input-gravatar-email"
+              type="email"
+              value={ email }
+              name="email"
+              onChange={ this.handleChange }
+              placeholder="Digite seu Email"
+            />
+          </label>
+        </div>
+        <div className="buttoons">
+
+          <button
+            className="button"
+            data-testid="btn-play"
+            disabled={ !(name.length > 0 && email.length > 0) }
+            onClick={ async () => {
             // Temos que fazer um tratamendo para caso retorne o response_code 0 ou 3
-            const token = await this.getToken();
-            dispatch(savePlayerInfo({ email, name }));
-            localStorage.setItem('token', token.token);
-            push('/game');
-          } }
-        >
-          Play
-        </button>
-        <Link to="/settings">
-          <button data-testid="btn-settings">Configurações</button>
-        </Link>
-      </>
+              const token = await this.getToken();
+              dispatch(savePlayerInfo({ email, name }));
+              localStorage.setItem('token', token.token);
+              push('/game');
+            } }
+          >
+            Play
+          </button>
+          <Link to="/settings">
+            <button
+              className="buttonConf"
+              data-testid="btn-settings"
+            >
+              Configurações
+
+            </button>
+          </Link>
+        </div>
+      </div>
     );
   }
 }
