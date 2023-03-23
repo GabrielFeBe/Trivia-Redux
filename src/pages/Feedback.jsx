@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import RankingButton from '../components/RankingButton';
 import { cleanPlayerInfo } from '../redux/actions';
+import './Feedback.css';
 
 class FeedBack extends Component {
   render() {
@@ -12,18 +13,22 @@ class FeedBack extends Component {
     return (
       <>
         <Header />
-        <div data-testid="feedback-text">
-          {
-            assertions < three ? <p>Could be better...</p> : <p>Well Done!</p>
-          }
+        <div className="font">
+
+          <div data-testid="feedback-text">
+            {
+              assertions < three ? <p>Could be better...</p> : <p>Well Done!</p>
+            }
+          </div>
+          <p data-testid="feedback-total-score">
+            {score}
+          </p>
+          <p data-testid="feedback-total-question">
+            {assertions}
+          </p>
         </div>
-        <p data-testid="feedback-total-score">
-          {score}
-        </p>
-        <p data-testid="feedback-total-question">
-          {assertions}
-        </p>
         <button
+          className="button"
           data-testid="btn-play-again"
           onClick={ () => {
             dispatch(cleanPlayerInfo());
