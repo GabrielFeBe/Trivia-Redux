@@ -22,7 +22,7 @@ export default class Game extends Component {
       const apiConfigResponse = await this.configApiRequest(
         configApi,
       );
-      if (apiConfigResponse.response_code === three || !token) {
+      if (apiConfigResponse.response_code !== 0 || !token) {
         this.limpaRedireciona();
       }
       this.setState({ triviaQuestion:

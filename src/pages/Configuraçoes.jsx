@@ -88,8 +88,8 @@ export default class Configuraçoes extends Component {
           <h2>
             Tenha em mente que talvez a Api não
             consiga aplicar todos os filtros que você desejar,
-            mas não se preuculpe caso isso aconteça vira uma resposta default da API,
-            com tudo aleatorio, Apos salvar as configurações clique em jogar.
+            mas não se preuculpe caso isso aconteça você sera
+            redirecionado para a página de login
           </h2>
           <button onClick={ () => push('/') }>Jogar</button>
           <button onClick={ () => this.limpaRedireciona() }>Limpar Config</button>
