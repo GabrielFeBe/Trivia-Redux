@@ -14,11 +14,24 @@ export default class Game extends Component {
   async componentDidMount() {
     const token = localStorage.getItem('token');
     // console.log(token);
-    const apiResponse = await this.apiRequest(token);
-    console.log(apiResponse);
-    if (apiResponse.response_code === three || !token) {
-      this.limpaRedireciona();
+    const configApi = localStorage.getItem('configApi');
+    console.log(configApi);
+
+    if (configApi !== null) {
+      console.log(configApi);
+      const apiConfigResponse = await this.configApiRequest(
+        configApi,
+      );
+      if (apiConfigResponse.response_code === three || !token) {
+        this.limpaRedireciona();
+      }
+      this.setState({ triviaQuestion:
+         apiConfigResponse.results });
     } else {
+      const apiResponse = await this.apiRequest(token);
+      if (apiResponse.response_code === three || !token) {
+        this.limpaRedireciona();
+      }
       this.setState({ triviaQuestion: apiResponse.results });
     }
   }
@@ -27,6 +40,12 @@ export default class Game extends Component {
     const { history } = this.props;
     localStorage.clear();
     history.push('/');
+  };
+
+  configApiRequest = async (api) => {
+    const response = await fetch(api);
+    const data = await response.json();
+    return data;
   };
 
   apiRequest = async (token) => {

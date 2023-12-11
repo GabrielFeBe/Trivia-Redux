@@ -23,8 +23,8 @@ class Ranking extends Component {
         {ranking.map(({ score, email, name }, index) => (
           <div key={ index }>
             <img src={ `https://www.gravatar.com/avatar/${md5(email)}` } alt={ `Foto de ${name}` } />
-            <p data-testid={ `player-name-${index}` }>{name}</p>
-            <p data-testid={ `player-score-${index}` }>{score}</p>
+            <p data-testid={ `player-name-${index}` } className="rank">{name}</p>
+            <p data-testid={ `player-score-${index}` } className="rank">{score}</p>
           </div>))}
         <button
           data-testid="btn-go-home"
@@ -32,6 +32,7 @@ class Ranking extends Component {
             dispatch(cleanPlayerInfo());
             push('/');
           } }
+          className="inicioBtn"
         >
           Inicio
         </button>

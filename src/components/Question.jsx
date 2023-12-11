@@ -39,6 +39,10 @@ class Question extends Component {
     default:
       break;
     }
+    // const fixedQuestionSplit =
+    let fixedQuestion = question.question.replaceAll('&quot;', '"');
+    fixedQuestion = fixedQuestion.replaceAll('&#039;', '\'');
+    this.setState({ fixedQuestion });
   }
 
   componentDidUpdate({ number: prevNumber }, prevState) {
@@ -88,13 +92,13 @@ class Question extends Component {
       score,
       name,
       email } = this.props;
-    const { trigger, arrayOfQuestions, seconds, timeOut } = this.state;
+    const { trigger, arrayOfQuestions, seconds, timeOut, fixedQuestion } = this.state;
     const four = 4;
     return (
       <div className="questionComponent">
         <div className="questionContainer">
           <p data-testid="question-category" className="category">{question.category}</p>
-          <p data-testid="question-text" className="questionBox">{question.question}</p>
+          <p data-testid="question-text" className="questionBox">{fixedQuestion}</p>
           <div className="timer">
             <img src={ timer } alt="timer" className="timerImg" />
             {`Tempo: ${seconds}s `}

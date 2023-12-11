@@ -90,6 +90,7 @@
   font-style: normal;
   font-weight: 400;
   height: 138px;
+  justify-content: center;
   line-height: 24px;
   text-align: center;
   width: 413px;
@@ -115,4 +116,29 @@
   text-align: center;
   width: 413px;
 
+}
+
+.config h2, h1 {
+  color: white;
+}
+
+.config button {
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+}
+
+.config button:active {
+  background-color: green;
+}
+
+.rank {
+  color: white;
+}
+
+.inicioBtn {
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px;
+  text-align: center;
 }
