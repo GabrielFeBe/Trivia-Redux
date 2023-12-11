@@ -6,6 +6,7 @@ import { savePlayerInfo } from '../redux/actions';
 import triviaLogo from '../svgs/login/triviaLogo.svg';
 import trybe from '../svgs/login/trybeLogo.svg';
 import engine from '../svgs/login/miniEngine.svg';
+import bg from '../svgs/login/bg.svg';
 
 class Login extends React.Component {
   state = {
@@ -32,7 +33,11 @@ class Login extends React.Component {
     const { name, email } = this.state;
     const { history: { push }, dispatch } = this.props;
     return (
-      <div className="flex items-center flex-col justify-center">
+      <div
+        className="flex items-center flex-col justify-center
+        min-h-screen bg-cover bg-center"
+        style={ { backgroundImage: `url(${bg})` } }
+      >
         <header className="mb-[12px] mt-[40px]">
 
           <img src={ triviaLogo } alt="" />
@@ -40,7 +45,7 @@ class Login extends React.Component {
 
         <main
           className="w-[614px] h-[340px] rounded-[10px] flex flex-col items-center
-        justify-center bg-white shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)] gap-[20px]"
+        justify-center bg-white  gap-[20px]"
         >
           <input
             id="name"
