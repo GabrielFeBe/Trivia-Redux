@@ -73,6 +73,7 @@ class Login extends React.Component {
           <button
             className="w-[519px] h-[45px] bg-[#2FC18C] flex items-center justify-center
             gap-[10px] rounded-[5px] text-white font-bold text-[18px] cursor-pointer
+            btn-shadow
             hover:bg-[#55f8bc] transition-colors duration-1000 hover:text-black"
             data-testid="btn-play"
             disabled={ !(name.length > 0 && email.length > 0) }
@@ -89,8 +90,8 @@ class Login extends React.Component {
           <Link to="/settings">
             <button
               className="w-[519px] h-[45px] bg-[#35906F] flex items-center justify-center
-              gap-[10px] rounded-[5px] text-white font-bold text-[18px]
-              hover:bg-[#173d2f] transition-colors duration-1000 hover:text-black"
+              gap-[10px] rounded-[5px] text-white font-bold text-[18px] btn-shadow
+              hover:bg-[#173d2f] transition-colors duration-1000 hover:text-black "
               data-testid="btn-settings"
             >
               <img src={ engine } alt="" />

@@ -6,6 +6,8 @@ import './Question.css';
 import certo from '../images/certo.png';
 import errado from '../images/errado.png';
 import timer from '../images/Vector.png';
+import bg from '../svgs/questions/bg.svg';
+import trivia from '../svgs/questions/trivia.svg';
 
 const zeroOFive = 0.5;
 
@@ -95,79 +97,95 @@ class Question extends Component {
     const { trigger, arrayOfQuestions, seconds, timeOut, fixedQuestion } = this.state;
     const four = 4;
     return (
-      <div className="questionComponent">
-        <div className="questionContainer">
-          <p data-testid="question-category" className="category">{question.category}</p>
-          <p data-testid="question-text" className="questionBox">{fixedQuestion}</p>
-          <div className="timer">
-            <img src={ timer } alt="timer" className="timerImg" />
-            {`Tempo: ${seconds}s `}
+      <main
+        className="h-[80vh] h-[80dvh] bg-cover bg-center relative"
+        style={ {
+          backgroundImage: `url(${bg})`,
+        } }
+      >
+        <div className="questionComponent ">
 
+          <div className="questionContainer mt-[160px]">
+            <img src={ trivia } alt="" className="absolute top-[-99px]" />
+
+            <p
+              data-testid="question-category"
+              className="category"
+            >
+              {question.category}
+
+            </p>
+            <p data-testid="question-text" className="questionBox">{fixedQuestion}</p>
+            <div className="timer">
+              <img src={ timer } alt="timer" className="timerImg" />
+              {`Tempo: ${seconds}s `}
+
+            </div>
           </div>
-        </div>
-        <div
-          data-testid="answer-options"
-          className="answerOptions"
-        >
+          <div
+            data-testid="answer-options"
+            className="answerOptions mt-[160px]"
+          >
 
-          {arrayOfQuestions.map((answer, index) => {
-            if (answer === question.correct_answer) {
+            {arrayOfQuestions.map((answer, index) => {
+              if (answer === question.correct_answer) {
+                return (
+                  <button
+                    key={ index }
+                    disabled={ timeOut }
+                    data-testid="correct-answer"
+                    className={ `questButton ${trigger && 'rigth '}` }
+                    // para Ligar as cores
+                    onClick={ () => {
+                      dispatch(savePlayerScore(this.savingScore()));
+                      clearInterval(this.intervalID);
+                      this.setState({ trigger: true, timeOut: true });
+                    } }
+                  >
+                    {trigger && (
+                      <div className="imgContainerCerto ml-[10px]">
+                        <img
+                          className="certo "
+                          src={ certo }
+                          alt="certo"
+                        />
+
+                      </div>)}
+                    <span className="ml-[21px] leading-[24px] text-[16px]">{answer}</span>
+                  </button>
+                );
+              }
+
               return (
                 <button
+                  data-testid={ `wrong-answer-${index}` }
                   key={ index }
                   disabled={ timeOut }
-                  data-testid="correct-answer"
-                  className={ `questButton ${trigger && 'rigth '}` }
-                  // para Ligar as cores
+                  className={ `questButton ${trigger && 'wrong'}` }
                   onClick={ () => {
-                    dispatch(savePlayerScore(this.savingScore()));
+                  // para ligar as cores
                     clearInterval(this.intervalID);
                     this.setState({ trigger: true, timeOut: true });
                   } }
                 >
                   {trigger && (
-                    <div className="imgContainerCerto">
-                      <img
-                        className="certo"
-                        src={ certo }
-                        alt="certo"
-                      />
+                    <div className="imgContainer ml-[10px]">
+                      <img src={ errado } alt="errado" className="errado" />
 
-                    </div>)}
-                  <span>{answer}</span>
+                    </div>
+                  )}
+                  <span className=" ml-[21px] leading-[24px] text-[16px]">{answer}</span>
+
                 </button>
               );
-            }
-
-            return (
-              <button
-                data-testid={ `wrong-answer-${index}` }
-                key={ index }
-                disabled={ timeOut }
-                className={ `questButton ${trigger && 'wrong'}` }
-                onClick={ () => {
-                  // para ligar as cores
-                  clearInterval(this.intervalID);
-                  this.setState({ trigger: true, timeOut: true });
-                } }
-              >
-                {trigger && (
-                  <div className="imgContainer">
-                    <img src={ errado } alt="errado" className="errado" />
-
-                  </div>
-                )}
-                <span>{answer}</span>
-
-              </button>
-            );
-          }) }
-          {
-            timeOut
+            }) }
+            {
+              timeOut
         && (
           <button
             data-testid="btn-next"
-            className="nextBtn"
+            className="absolute bottom-3
+            bg-[#2FC18C] w-[519px] h-[45px] rounded-[5px]"
             onClick={ () => {
               if (number === four) {
                 const myArray = JSON.parse(localStorage.getItem('ranking')) || [];
@@ -186,9 +204,11 @@ class Question extends Component {
             Next
           </button>
         )
-          }
+            }
+          </div>
         </div>
-      </div>
+      </main>
+
     );
   }
 }

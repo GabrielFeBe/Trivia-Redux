@@ -110,7 +110,7 @@ export default class Configuraçoes extends Component {
               push('/');
             } }
             className="w-[387px] h-[45px] bg-[#2FC18C] transition-colors duration-1000
-             text-white rounded-[5px] hover:bg-[#55f8bc]"
+             text-white rounded-[5px] hover:bg-[#55f8bc] btn-shadow"
 
           >
             JOGAR
@@ -125,7 +125,7 @@ export default class Configuraçoes extends Component {
           <button
             onClick={ () => this.limpaRedireciona() }
             className="w-[387px] h-[45px] bg-[#2FC18C] transition-colors duration-1000
-             text-white rounded-[5px] hover:bg-[#55f8bc]"
+             text-white rounded-[5px] hover:bg-[#55f8bc] btn-shadow"
           >
             LIMPAR
 
