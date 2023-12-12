@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
+import bg from '../svgs/login/bg.svg';
+import logo from '../svgs/config/logo.svg';
 
 const categoryArray = [{ id: 9, name: 'General Knowledge' },
   { id: 10, name: 'Entertainment: Books' },
@@ -52,47 +53,83 @@ export default class Configuraçoes extends Component {
     const { type, difficulty, category } = this.state;
     const { history: { push } } = this.props;
     return (
-      <div className="config">
-        <Header />
-        <h1 data-testid="settings-title">Configurações</h1>
-        <main>
-          <div>
-            <select
-              name="category"
-              id="categoty"
-              onClick={ this.handleChange }
-            >
-              {categoryArray.map(({ name, id }) => (
-                <option key={ id } value={ id }>
-                  {name}
-                </option>))}
-            </select>
-            <select name="difficulty" id="" onClick={ this.handleChange }>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-            <select name="type" id="" onClick={ this.handleChange }>
-              <option value="boolean">True/False</option>
-              <option value="multiple">Multiple Choice</option>
-            </select>
-          </div>
+      <div
+        className="config min-h-screen bg-cover flex justify-center items-center flex-col"
+        style={ {
+          backgroundImage: `url(${bg})`,
+        } }
+      >
+        <main
+          className="w-[489px] h-[540px] bg-white flex-col
+        relative rounded-[10px] flex justify-center items-center gap-[15px]"
+        >
+          <img src={ logo } alt="" className="top-[-103px] absolute" />
+          <h1
+            data-testid="settings-title"
+            className="font-bold
+          text-3xl text-center text-[#3f327b] mt-[100px]"
+          >
+            CONFIGURAÇÕES
+
+          </h1>
+
+          <select
+            name="category"
+            id="categoty"
+            onClick={ this.handleChange }
+            className="w-[387px] h-[45px] pt-[12px] pb-[12px] pl-[16px] pr-[16px]"
+          >
+            {categoryArray.map(({ name, id }) => (
+              <option key={ id } value={ id }>
+                {name}
+              </option>))}
+          </select>
+          <select
+            name="difficulty"
+            id=""
+            onClick={ this.handleChange }
+            className="w-[387px] h-[45px] pt-[12px] pb-[12px] pl-[16px] pr-[16px]"
+          >
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <select
+            name="type"
+            id=""
+            onClick={ this.handleChange }
+            className="w-[387px] h-[45px] pt-[12px] pb-[12px] pl-[16px] pr-[16px]"
+
+          >
+            <option value="boolean">True/False</option>
+            <option value="multiple">Multiple Choice</option>
+          </select>
           <button
             onClick={ () => {
               localStorage.setItem('configApi', `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=${type}`);
+              push('/');
             } }
+            className="w-[387px] h-[45px] bg-[#2FC18C] transition-colors duration-1000
+             text-white rounded-[5px] hover:bg-[#55f8bc]"
+
           >
-            Save Config
+            JOGAR
 
           </button>
-          <h2>
+          {/* <h2 className=" text-blue-800">
             Tenha em mente que talvez a Api não
             consiga aplicar todos os filtros que você desejar,
             mas não se preuculpe caso isso aconteça você sera
             redirecionado para a página de login
-          </h2>
-          <button onClick={ () => push('/') }>Jogar</button>
-          <button onClick={ () => this.limpaRedireciona() }>Limpar Config</button>
+          </h2> */}
+          <button
+            onClick={ () => this.limpaRedireciona() }
+            className="w-[387px] h-[45px] bg-[#2FC18C] transition-colors duration-1000
+             text-white rounded-[5px] hover:bg-[#55f8bc]"
+          >
+            LIMPAR
+
+          </button>
         </main>
       </div>
     );

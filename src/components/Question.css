@@ -118,14 +118,11 @@
 
 }
 
-.config h2, h1 {
-  color: white;
-}
 
 .config button {
   cursor: pointer;
-  padding: 5px;
   margin: 5px;
+  padding: 5px;
 }
 
 .config button:active {
